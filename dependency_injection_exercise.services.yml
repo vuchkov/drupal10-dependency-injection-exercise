@@ -1,0 +1,7 @@
+services:
+  dependency_injection_exercise.rest_output:
+    class: Drupal\dependency_injection_exercise\RestOutputService
+#  Following will override core service named "language_manager".
+  language_manager:
+    class: Drupal\dependency_injection_exercise\MyLanguageManager
+    arguments: [ '@language.default' ]

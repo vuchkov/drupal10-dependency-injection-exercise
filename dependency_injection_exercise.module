@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * Module file for dependency_injection_exercise custom module.
+ */
+
+/**
+ * Implements hook_mail() function.
+ */
+function dependency_injection_exercise_mail($key, &$message, $params) {
+  if ($message['to'] !== 'nope@doesntexist.com') {
+    $message['to'] = 'nope@doesntexist.com';
+  }
+}
+
+/**
+ * Implements hook_system_breadcrumb_alter().
+ */
+function dependency_injection_exercise_system_breadcrumb_alter(\Drupal\Core\Breadcrumb\Breadcrumb &$breadcrumb, \Drupal\Core\Routing\RouteMatchInterface $route_match, array $context) {
+  // Add an item to the end of the breadcrumb.
+  $breadcrumb->addLink(\Drupal\Core\Link::fromTextAndUrl(t('Dropsolid'), \Drupal\Core\Url::fromUri('internal:/dropsolid')));
+  $breadcrumb->addLink(\Drupal\Core\Link::fromTextAndUrl(t('Example'), \Drupal\Core\Url::fromUri('internal:/dropsolid/example')));
+  $breadcrumb->addLink(\Drupal\Core\Link::fromTextAndUrl(t('Photos'), \Drupal\Core\Url::fromUri('internal:/dropsolid/example/photos')));
+}
